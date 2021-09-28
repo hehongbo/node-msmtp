@@ -1,4 +1,5 @@
 const child_process = require("child_process");
+const sysexitsError = require("./sysexits-errors");
 
 const defaultPort = security => {
     switch (security) {
@@ -76,7 +77,7 @@ module.exports = class {
                 if (code === 0) {
                     resolve();
                 } else {
-                    reject();
+                    reject(sysexitsError(code));
                 }
             });
             this.msmtpInstance.stdin.write(mailHeader({
