@@ -71,15 +71,24 @@ module.exports = class {
             body
         }
     ) {
-        this.msmtpInstance.stdin.write(mailHeader({
-            to: to,
-            recipientName: recipientName,
-            subject: subject,
-            senderMail: this.mailAddress,
-            senderName: this.senderName
-        }));
-        this.msmtpInstance.stdin.write("\n\n");
-        this.msmtpInstance.stdin.write(body);
-        this.msmtpInstance.stdin.end();
+        return new Promise((resolve, reject) => {
+            this.msmtpInstance.on("close", code => {
+                if (code === 0) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            });
+            this.msmtpInstance.stdin.write(mailHeader({
+                to: to,
+                recipientName: recipientName,
+                subject: subject,
+                senderMail: this.mailAddress,
+                senderName: this.senderName
+            }));
+            this.msmtpInstance.stdin.write("\n\n");
+            this.msmtpInstance.stdin.write(body);
+            this.msmtpInstance.stdin.end();
+        });
     }
 }

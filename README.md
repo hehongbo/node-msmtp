@@ -27,5 +27,9 @@ msmtp.sendMail({
     recipientName: "Alice",
     subject: "Greetings",
     body: "It's a nice day!"
+}).then(() => {
+    console.log("Send successfully.");
+}).catch(e => {
+    console.log("Failed to send.");
 });
 ```
