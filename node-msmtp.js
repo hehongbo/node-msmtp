@@ -55,7 +55,9 @@ module.exports = class {
                 "--read-recipients"
             ]);
             this.msmtpInstance.on("error", err => {
-                throw err;
+                if (err.code === "ENOENT") {
+                    throw new Error("MSMTP_NOT_INSTALLED");
+                } else throw err;
             });
             this.senderName = senderName;
             this.mailAddress = mailAddress;
