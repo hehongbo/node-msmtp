@@ -1,12 +1,16 @@
 {
   "name": "node-msmtp",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "A simple msmtp wrapper for node.",
   "main": "node-msmtp.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hehongbo/node-msmtp.git"
   },
+  "files": [
+    "node-msmtp.js",
+    "sysexits-errors.js"
+  ],
   "author": "Hongbo He",
   "license": "MIT",
   "bugs": {
