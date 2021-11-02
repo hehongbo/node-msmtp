@@ -23,7 +23,7 @@ module.exports = class {
                 `--tls-starttls=${security === "starttls" ? "on" : "off"}`,
                 "--read-envelope-from",
                 "--read-recipients"
-            ]);
+            ], {stdio: ["pipe", "ignore", "ignore"]});
             this.msmtpInstance.on("error", err => {
                 if (err.code === "ENOENT") {
                     throw new Error("MSMTP_NOT_INSTALLED");
@@ -43,7 +43,7 @@ module.exports = class {
                     reject(sysexitsError(code));
                 }
             });
-            this.msmtpInstance.stdout.on("data", () => null);
+            this.msmtpInstance.stdin.on("error", () => null);
             this.msmtpInstance.stdin.write(mail);
             this.msmtpInstance.stdin.end();
         });
