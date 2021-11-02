@@ -1,6 +1,6 @@
 {
   "name": "node-msmtp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple msmtp wrapper for node.",
   "main": "node-msmtp.js",
   "repository": {

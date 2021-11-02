@@ -43,8 +43,9 @@ module.exports = class {
                     reject(sysexitsError(code));
                 }
             });
+            this.msmtpInstance.stdout.on("data", () => null);
             this.msmtpInstance.stdin.write(mail);
             this.msmtpInstance.stdin.end();
         });
     }
-}
+};
